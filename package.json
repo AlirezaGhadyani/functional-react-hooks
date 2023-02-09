@@ -1,0 +1,68 @@
+{
+  "name": "useful-react-hooks",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Alireza Ghadyani",
+  "description": "this package is a toolset of useful react custom hook's",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "types": "src/types.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "module": "dist/useful-react-hooks.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/useful-react-hooks.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/useful-react-hooks.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^8.1.2",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/react": "^18.0.27",
+    "husky": "^8.0.3",
+    "react": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
+    "size-limit": "^8.1.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  },
+  "keywords": [
+    "useful-react-hooks",
+    "react",
+    "hooks",
+    "custom hooks",
+    "alireza ghadyani"
+  ]
+}
