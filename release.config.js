@@ -12,6 +12,7 @@ const config = {
       },
     ],
     '@semantic-release/github',
+    '@semantic-release/npm',
   ],
 };
 

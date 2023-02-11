@@ -1,18 +1,32 @@
 {
-  "name": "useful-react-hooks",
-  "version": "0.1.0",
+  "name": "functional-react-hooks",
+  "version": "0.0.0-development",
   "license": "MIT",
   "author": "Alireza Ghadyani",
+  "private": false,
   "description": "this package is a toolset of useful react custom hook's",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "types": "src/types.d.ts",
+  "module": "dist/functional-react-hooks.esm.js",
   "files": [
     "dist",
     "src"
   ],
   "engines": {
     "node": ">=10"
+  },
+  "repository": {
+    "url": "https://github.com/AlirezaGhadyani/functional-react-hooks.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/AlirezaGhadyani/functional-react-hooks/issues",
+    "email": "alirezaghadyani16@gmail.com"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "start": "tsdx watch",
@@ -22,34 +36,14 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "commit": "cz"
+    "commit": "cz",
+    "semantic-release": "semantic-release"
   },
   "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "module": "dist/useful-react-hooks.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/useful-react-hooks.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/useful-react-hooks.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.7",
+    "@semantic-release/npm": "^9.0.2",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@testing-library/react-hooks": "^8.0.1",
     "@types/react": "^18.0.27",
@@ -70,6 +64,17 @@
     "custom hooks",
     "alireza ghadyani"
   ],
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -78,5 +83,15 @@
   "resolutions": {
     "**/@typescript-eslint/eslint-plugin": "^4.1.1",
     "**/@typescript-eslint/parser": "^4.1.1"
-  }
+  },
+  "size-limit": [
+    {
+      "path": "dist/functional-react-hooks.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/functional-react-hooks.esm.js",
+      "limit": "10 KB"
+    }
+  ]
 }
