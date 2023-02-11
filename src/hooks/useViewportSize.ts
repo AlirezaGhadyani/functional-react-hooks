@@ -30,7 +30,7 @@ export default () => {
       window.removeEventListener('resize', setSizeHandler);
       window.removeEventListener('orientationchange', setSizeHandler);
     };
-  }, []);
+  }, [setSizeHandler]);
 
   return viewportSize;
 };

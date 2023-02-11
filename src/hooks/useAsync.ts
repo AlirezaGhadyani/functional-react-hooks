@@ -39,7 +39,7 @@ export default (
         if (args?.onError) args.onError(error, status);
       }
     },
-    [asyncFunction]
+    [asyncFunction, status]
   );
 
   // * by default execute `executeAsync` function on component mount
@@ -51,7 +51,7 @@ export default (
         variables: options?.variables,
       });
     }
-  }, [options.immediate]);
+  }, [options, executeAsync]);
 
   return [executeAsync, { response, status, error }];
 };

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default (initialState = false) => {
   const [bool, setBool] = useState<boolean>(initialState);
 
   // * toggle bool
-  const toggleBool = () => setBool((prevBool) => !prevBool);
+  const toggleBool = () => setBool(prevBool => !prevBool);
 
   // * set bool true
   const setBoolTrue = () => setBool(true);
