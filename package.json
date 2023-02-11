@@ -48,6 +48,8 @@
     }
   ],
   "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.7",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@testing-library/react-hooks": "^8.0.1",
     "@types/react": "^18.0.27",
@@ -55,6 +57,7 @@
     "husky": "^8.0.3",
     "react": "^18.2.0",
     "react-test-renderer": "^18.2.0",
+    "semantic-release": "^20.1.0",
     "size-limit": "^8.1.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.5.0",
