@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export type UseViewportSize = {
   width?: number;
   height?: number;
@@ -27,3 +29,15 @@ export type UseEventListenerOptions = {
   handler: Function;
   element?: EventTarget;
 };
+
+export type UseStorageOptions<DefaultValues> = {
+  storageName: string;
+  defaultValues?: DefaultValues;
+  nullValue?: boolean;
+};
+
+export type UseStorageReturn<DefaultValues> = [
+  DefaultValues,
+  Dispatch<SetStateAction<DefaultValues | any>>,
+  () => void
+];

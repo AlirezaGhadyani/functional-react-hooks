@@ -514,6 +514,59 @@ var useEventListener = (function (options) {
   return null;
 });
 
+var isBrowser = typeof window !== 'undefined';
+
+var setSessionStorage = function setSessionStorage(key, value) {
+  if (isBrowser) return sessionStorage.setItem(key, JSON.stringify(value));
+  return;
+};
+var getSessionStorage = function getSessionStorage(key) {
+  if (isBrowser) {
+    var storageValue = sessionStorage.getItem(key);
+    // * if type of value from session storage is string parse it then return
+    // * else return original value
+    if (typeof storageValue === 'string') return JSON.parse(storageValue);
+    return storageValue;
+  }
+  return;
+};
+var removeSessionStorage = function removeSessionStorage(key) {
+  if (isBrowser) return sessionStorage.removeItem(key);
+  return;
+};
+var sessionStorage$1 = {
+  setSessionStorage: setSessionStorage,
+  getSessionStorage: getSessionStorage,
+  removeSessionStorage: removeSessionStorage
+};
+
+var setLocalStorage = function setLocalStorage(key, value) {
+  if (isBrowser) return localStorage.setItem(key, JSON.stringify(value));
+  return;
+};
+var getLocalStorage = function getLocalStorage(key) {
+  if (isBrowser) {
+    var storageValue = localStorage.getItem(key);
+    // * if type of value from local storage is string parse it then return
+    // * else return original value
+    if (typeof storageValue === 'string') return JSON.parse(storageValue);
+    return storageValue;
+  }
+  return;
+};
+var removeLocalStorage = function removeLocalStorage(key) {
+  if (isBrowser) return localStorage.removeItem(key);
+  return;
+};
+var localStorage$1 = {
+  setLocalStorage: setLocalStorage,
+  getLocalStorage: getLocalStorage,
+  removeLocalStorage: removeLocalStorage
+};
+
+exports.isBrowser = isBrowser;
+exports.localStorage = localStorage$1;
+exports.sessionStorage = sessionStorage$1;
 exports.useAsync = useAsync;
 exports.useBool = useBool;
 exports.useEventListener = useEventListener;
