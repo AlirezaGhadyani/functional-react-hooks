@@ -2,7 +2,10 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
 var react = require('react');
+var Cookies = _interopDefault(require('js-cookie'));
 
 var useBool = (function (initialState) {
   if (initialState === void 0) {
@@ -410,6 +413,32 @@ function _asyncToGenerator(fn) {
     });
   };
 }
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
 
 var useAsync = (function (asyncFunction, options) {
   if (options === void 0) {
@@ -516,11 +545,11 @@ var useEventListener = (function (options) {
 
 var isBrowser = typeof window !== 'undefined';
 
-var setSessionStorage = function setSessionStorage(key, value) {
+var set = function set(key, value) {
   if (isBrowser) return sessionStorage.setItem(key, JSON.stringify(value));
   return;
 };
-var getSessionStorage = function getSessionStorage(key) {
+var get = function get(key) {
   if (isBrowser) {
     var storageValue = sessionStorage.getItem(key);
     // * if type of value from session storage is string parse it then return
@@ -530,21 +559,21 @@ var getSessionStorage = function getSessionStorage(key) {
   }
   return;
 };
-var removeSessionStorage = function removeSessionStorage(key) {
+var remove = function remove(key) {
   if (isBrowser) return sessionStorage.removeItem(key);
   return;
 };
 var sessionStorage$1 = {
-  setSessionStorage: setSessionStorage,
-  getSessionStorage: getSessionStorage,
-  removeSessionStorage: removeSessionStorage
+  set: set,
+  get: get,
+  remove: remove
 };
 
-var setLocalStorage = function setLocalStorage(key, value) {
+var set$1 = function set(key, value) {
   if (isBrowser) return localStorage.setItem(key, JSON.stringify(value));
   return;
 };
-var getLocalStorage = function getLocalStorage(key) {
+var get$1 = function get(key) {
   if (isBrowser) {
     var storageValue = localStorage.getItem(key);
     // * if type of value from local storage is string parse it then return
@@ -554,22 +583,121 @@ var getLocalStorage = function getLocalStorage(key) {
   }
   return;
 };
-var removeLocalStorage = function removeLocalStorage(key) {
+var remove$1 = function remove(key) {
   if (isBrowser) return localStorage.removeItem(key);
   return;
 };
 var localStorage$1 = {
-  setLocalStorage: setLocalStorage,
-  getLocalStorage: getLocalStorage,
-  removeLocalStorage: removeLocalStorage
+  set: set$1,
+  get: get$1,
+  remove: remove$1
 };
 
+var cookieStorage = /*#__PURE__*/_extends({}, Cookies);
+
+var get$2 = localStorage$1.get,
+  set$2 = localStorage$1.set,
+  remove$2 = localStorage$1.remove;
+var useLocalStorage = (function (options) {
+  var _useState = react.useState(function () {
+      try {
+        var storageValue = get$2(options.storageName);
+        if (!options.nullValue) {
+          if (storageValue === null || typeof storageValue === 'undefined') {
+            return options.defaultValues;
+          } else return storageValue;
+        } else return storageValue;
+      } catch (error) {
+        console.error(error);
+        return options == null ? void 0 : options.defaultValues;
+      }
+    }),
+    storage = _useState[0],
+    setStorage = _useState[1];
+  // * whenever state value changed set new state to local
+  react.useEffect(function () {
+    set$2(options.storageName, storage);
+  }, [storage, options.storageName]);
+  var removeStorage = function removeStorage() {
+    return remove$2(options.storageName);
+  };
+  return [storage, setStorage, removeStorage];
+});
+
+var get$3 = sessionStorage$1.get,
+  set$3 = sessionStorage$1.set,
+  remove$3 = sessionStorage$1.remove;
+var useSessionStorage = (function (options) {
+  var _useState = react.useState(function () {
+      try {
+        var storageValue = get$3(options.storageName);
+        if (!options.nullValue) {
+          if (storageValue === null || typeof storageValue === 'undefined') {
+            return options.defaultValues;
+          } else return storageValue;
+        } else return storageValue;
+      } catch (error) {
+        console.error(error);
+        return options == null ? void 0 : options.defaultValues;
+      }
+    }),
+    storage = _useState[0],
+    setStorage = _useState[1];
+  // * whenever state value changed set new state to session
+  react.useEffect(function () {
+    set$3(options.storageName, storage);
+  }, [storage, options.storageName]);
+  var removeStorage = function removeStorage() {
+    return remove$3(options.storageName);
+  };
+  return [storage, setStorage, removeStorage];
+});
+
+var _excluded = ["storageName", "defaultValues", "nullValue"];
+var get$4 = cookieStorage.get,
+  set$4 = cookieStorage.set,
+  remove$4 = cookieStorage.remove;
+var useCookies = (function (options) {
+  var storageName = options.storageName,
+    defaultValues = options.defaultValues,
+    nullValue = options.nullValue,
+    restOptions = _objectWithoutPropertiesLoose(options, _excluded);
+  var _useState = react.useState(function () {
+      try {
+        // * get cookie storage and parse it to json
+        var storageValue = get$4(storageName);
+        if (!nullValue) {
+          if (storageValue === null || typeof storageValue === 'undefined') {
+            return defaultValues;
+          } else return JSON.parse(storageValue);
+        } else return JSON.parse(storageValue || 'null');
+      } catch (error) {
+        console.error(error);
+        return defaultValues;
+      }
+    }),
+    storage = _useState[0],
+    setStorage = _useState[1];
+  // * whenever state value changed set new state to local
+  react.useEffect(function () {
+    set$4(storageName, JSON.stringify(storage), _extends({}, restOptions));
+  }, [storage, storageName]);
+  var removeStorage = function removeStorage(options) {
+    return remove$4(storageName, options);
+  };
+  return [storage, setStorage, removeStorage];
+});
+
+exports.cookieStorage = cookieStorage;
 exports.isBrowser = isBrowser;
 exports.localStorage = localStorage$1;
 exports.sessionStorage = sessionStorage$1;
 exports.useAsync = useAsync;
 exports.useBool = useBool;
+exports.useCookies = useCookies;
 exports.useEventListener = useEventListener;
 exports.useIsDomReady = useIsDomReady;
+exports.useLocalStorage = useLocalStorage;
+exports.useSessionStorage = useSessionStorage;
 exports.useViewportSize = useViewportSize;
 //# sourceMappingURL=functional-react-hooks.cjs.development.js.map

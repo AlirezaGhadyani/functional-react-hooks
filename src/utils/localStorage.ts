@@ -1,11 +1,11 @@
 import isBrowser from './isBrowser';
 
-const setLocalStorage = <Value>(key: string, value: Value) => {
+const set = <Value>(key: string, value: Value) => {
   if (isBrowser) return localStorage.setItem(key, JSON.stringify(value));
   return;
 };
 
-const getLocalStorage = (key: string) => {
+const get = (key: string) => {
   if (isBrowser) {
     const storageValue = localStorage.getItem(key);
     // * if type of value from local storage is string parse it then return
@@ -17,9 +17,9 @@ const getLocalStorage = (key: string) => {
   return;
 };
 
-const removeLocalStorage = (key: string) => {
+const remove = (key: string) => {
   if (isBrowser) return localStorage.removeItem(key);
   return;
 };
 
-export default { setLocalStorage, getLocalStorage, removeLocalStorage };
+export default { set, get, remove };

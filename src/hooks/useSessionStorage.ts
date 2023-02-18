@@ -2,18 +2,14 @@ import { useState, useEffect } from 'react';
 import { UseStorageOptions, UseStorageReturn } from '../types';
 import { sessionStorage } from '../utils';
 
-const {
-  getSessionStorage,
-  setSessionStorage,
-  removeSessionStorage,
-} = sessionStorage;
+const { get, set, remove } = sessionStorage;
 
 export default <DefaultValues>(
   options: UseStorageOptions<DefaultValues>
 ): UseStorageReturn<DefaultValues> => {
   const [storage, setStorage] = useState<DefaultValues>(() => {
     try {
-      const storageValue = getSessionStorage(options.storageName);
+      const storageValue = get(options.storageName);
       if (!options.nullValue) {
         if (storageValue === null || typeof storageValue === 'undefined') {
           return options.defaultValues;
@@ -27,10 +23,10 @@ export default <DefaultValues>(
 
   // * whenever state value changed set new state to session
   useEffect(() => {
-    setSessionStorage(options.storageName, storage);
+    set(options.storageName, storage);
   }, [storage, options.storageName]);
 
-  const removeStorage = () => removeSessionStorage(options.storageName);
+  const removeStorage = () => remove(options.storageName);
 
   return [storage, setStorage, removeStorage];
 };

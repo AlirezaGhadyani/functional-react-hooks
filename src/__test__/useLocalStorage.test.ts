@@ -22,7 +22,7 @@ describe('useLocalStorage', () => {
 
       renderHook(() =>
         useEffect(() => {
-          const localStorageValue = localStorage.getLocalStorage(storageKey);
+          const localStorageValue = localStorage.get(storageKey);
           expect(localStorageValue).toEqual(data);
         }, [])
       );
@@ -75,7 +75,7 @@ describe('useLocalStorage', () => {
     act(() => {
       result.current?.[1]((prevValue: any) => ({ ...prevValue, age: 20 }));
     });
-    expect(localStorage.getLocalStorage(storageKey)).toHaveProperty('age');
+    expect(localStorage.get(storageKey)).toHaveProperty('age');
   });
 
   // ? Case 5 : test removeStorage function
@@ -91,6 +91,6 @@ describe('useLocalStorage', () => {
       result.current?.[2]();
     });
 
-    expect(localStorage.getLocalStorage(storageKey)).toBe(null);
+    expect(localStorage.get(storageKey)).toBe(null);
   });
 });
