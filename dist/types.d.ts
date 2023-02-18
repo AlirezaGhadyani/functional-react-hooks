@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import { CookieAttributes } from 'js-cookie';
 export declare type UseViewportSize = {
     width?: number;
     height?: number;
@@ -23,9 +24,12 @@ export declare type UseEventListenerOptions = {
     handler: Function;
     element?: EventTarget;
 };
-export declare type UseStorageOptions<DefaultValues> = {
+export interface UseStorageOptions<DefaultValues> {
     storageName: string;
     defaultValues?: DefaultValues;
     nullValue?: boolean;
-};
+}
 export declare type UseStorageReturn<DefaultValues> = [DefaultValues, Dispatch<SetStateAction<DefaultValues | any>>, () => void];
+export interface UseCookiesOptions<DefaultValues> extends UseStorageOptions<DefaultValues>, CookieAttributes {
+}
+export { CookieAttributes, Converter, CookieReadConverter, CookieWriteConverter, CookiesStatic, } from 'js-cookie';

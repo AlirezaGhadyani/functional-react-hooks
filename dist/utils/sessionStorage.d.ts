@@ -1,6 +1,6 @@
 declare const _default: {
-    setSessionStorage: <Value>(key: string, value: Value) => void;
-    getSessionStorage: (key: string) => any;
-    removeSessionStorage: (key: string) => void;
+    set: <Value>(key: string, value: Value) => void;
+    get: (key: string) => any;
+    remove: (key: string) => void;
 };
 export default _default;
