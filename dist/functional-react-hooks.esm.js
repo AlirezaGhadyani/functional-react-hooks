@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import Cookies from 'js-cookie';
+import cookieStorage from 'js-cookie';
+export { default as cookieStorage } from 'js-cookie';
 
 var useBool = (function (initialState) {
   if (initialState === void 0) {
@@ -587,8 +588,6 @@ var localStorage$1 = {
   remove: remove$1
 };
 
-var cookieStorage = /*#__PURE__*/_extends({}, Cookies);
-
 var get$2 = localStorage$1.get,
   set$2 = localStorage$1.set,
   remove$2 = localStorage$1.remove;
@@ -682,5 +681,5 @@ var useCookies = (function (options) {
   return [storage, setStorage, removeStorage];
 });
 
-export { cookieStorage, isBrowser, localStorage$1 as localStorage, sessionStorage$1 as sessionStorage, useAsync, useBool, useCookies, useEventListener, useIsDomReady, useLocalStorage, useSessionStorage, useViewportSize };
+export { isBrowser, localStorage$1 as localStorage, sessionStorage$1 as sessionStorage, useAsync, useBool, useCookies, useEventListener, useIsDomReady, useLocalStorage, useSessionStorage, useViewportSize };
 //# sourceMappingURL=functional-react-hooks.esm.js.map

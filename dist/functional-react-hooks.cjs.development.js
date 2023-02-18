@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var react = require('react');
-var Cookies = _interopDefault(require('js-cookie'));
+var cookieStorage = _interopDefault(require('js-cookie'));
 
 var useBool = (function (initialState) {
   if (initialState === void 0) {
@@ -592,8 +592,6 @@ var localStorage$1 = {
   get: get$1,
   remove: remove$1
 };
-
-var cookieStorage = /*#__PURE__*/_extends({}, Cookies);
 
 var get$2 = localStorage$1.get,
   set$2 = localStorage$1.set,
