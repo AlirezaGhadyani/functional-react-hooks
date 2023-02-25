@@ -1,0 +1,8 @@
+tsconfig.json
+src
+.vscode
+.travis.yml
+yarn.lock
+.prettierrc.json
+.eslintrc.json
+release.config.js
